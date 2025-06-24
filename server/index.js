@@ -56,5 +56,5 @@ mongoose.connect(process.env.MONGO_URI)
         })
     })
     .catch(err =>{
-        console.error('Failed to conenct to MongoDB', err)
+        console.error('Failed to connect to MongoDB', err)
     })
