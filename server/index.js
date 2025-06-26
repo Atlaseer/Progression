@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import brcypt from 'bcrypt';
 import path from 'path';
 import dotenv from 'dotenv';
 import ip from 'ip';
@@ -44,6 +45,7 @@ app.get('/api/message', (req, res) => {
     res.json({ message: 'Message from backend'})
 })
 
+//Gets local IP address
 const ipAddress = ip.address();
 
 mongoose.connect(process.env.MONGO_URI)

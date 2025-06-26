@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import HomePage from './pages/HomePage';
 import LoadingPage from './pages/LoadingPage';
+import BannedPage from './pages/BannedPage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,8 +28,8 @@ function App() {
   
   return (
 
-    <BrowserRouter>
-    
+   <BrowserRouter>
+
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
