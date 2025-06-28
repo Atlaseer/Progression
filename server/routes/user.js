@@ -1,5 +1,6 @@
 import express from 'express';
 import user from '../models/User.js'
+import User from '../models/User.js';
 
 const router = express.Router();
 
@@ -24,7 +25,51 @@ router.post('/', async (req, res) => {
             res.status(422).send({ error: 'Invalid email format' })
         }
 
+        const existingUser = await User.findOne({ username });
+        if (existingUser) { return res.status(409).send({ error: 'Username already exists'})}
+
+        const existingEmail = await User.findOne({ email });
+        if (existingEmail) { return res.status(409).send({ error: 'Email already exists'})}
+
+        if (password.length < 6 ) {
+            return res.status(422).send({ error: 'Password must be at least 6 characters long' })
+        }
+
+        const user = new User({
+            ...req.body,
+            username,
+            email,
+            password,
+            firstName,
+            lastName
+        });
+
+        await user.save();
+        res.status(201).send(user)
+
     } catch (error) {
         res.status(500).send({ error: `Server error: ${error.message}`})
     }
 })
+
+//Get all users
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find().select('-password');
+        res.status(200).json(users);
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+})
+
+//Get user by ID
+router.get('/id/:id', async (req, res) => {
+    try{
+        const user = await User.findById(req.params.id).select('-password')
+        if(!user) return res.status(404).json({ message: 'User not found' })
+        res.status(200).json(user)
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+})
+
