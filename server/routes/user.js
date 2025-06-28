@@ -58,18 +58,66 @@ router.get('/', async (req, res) => {
         const users = await User.find().select('-password');
         res.status(200).json(users);
     } catch (err) {
-        res.status(500).json({ error: err.message })
+        res.status(500).json({ error: err.message });
     }
 })
 
 //Get user by ID
 router.get('/id/:id', async (req, res) => {
     try{
-        const user = await User.findById(req.params.id).select('-password')
-        if(!user) return res.status(404).json({ message: 'User not found' })
-        res.status(200).json(user)
+        const user = await User.findById(req.params.id).select('-password');
+        if(!user) return res.status(404).json({ message: 'User not found' });
+        res.status(200).json(user);
     } catch (err) {
-        res.status(500).json({ error: err.message })
+        res.status(500).json({ error: err.message });
     }
 })
 
+//Get user by username
+router.get('/username/:username', async (req, res)=>{
+    try {
+        const user = await User.findOne({ username: req.params.username }).select('-password');
+        if(!user) return res.status(404).json({ message: 'No such user' });
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+})
+
+//Update user by ID (username, isAdmin, isActive)
+router.put('/:id', async (req, res) => {
+    try{
+        const { username, isAdmin, isActive } = req.body;
+        const updates = {};
+
+        if (username) updates.username = username.trim();
+        if (isAdmin !== undefined) updates.isAdmin = isAdmin;
+        if (isActive !== undefined) updates.isActive = isActive;
+
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, updates, {
+            new: true,
+            runValidators: true,
+        }).select('-password');
+
+        if (!updatedUser) return res.status(404).json({ error: 'User not found' });
+        res.status(200).json(updatedUser);
+
+    } catch (err) {
+        res.status(500).json({ error: `Failed to update user ${err.message}` });
+    }
+})
+
+//Delete user by ID
+router.delete('/:id', async (req, res)=>{
+    try{
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+        if (!deletedUser) return res.status(404).json({ error: 'User not found' })
+        res.status(200).json({ message: 'User deleted successfully' })
+
+    } catch (err) {
+        res.status(500).json({ error: `Failed to delete user ${err.message}`})
+    }
+})
+
+export default router;
