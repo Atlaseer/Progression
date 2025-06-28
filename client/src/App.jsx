@@ -29,6 +29,7 @@ function App() {
   return (
 
    <BrowserRouter>
+   <Header/>
    <Routes>
     <Route path="/" element={
       <>
@@ -55,6 +56,7 @@ function App() {
       </>
     } />
   </Routes>
+  <Footer/>
     </BrowserRouter>
   )
 }
