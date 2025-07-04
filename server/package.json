@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "seedUsers": "node seeds/UsersSeed.js",
-    "seedExercises": "node seeds/ExercisesSeed.js",
-    "seedWorkouts": "node seeds/WorkoutsSeed.js",
+    "seedUsers": "node seeds/SeedUser.js",
+    "seedExercises": "node seeds/SeedExercise.js",
+    "seedWorkouts": "node seeds/SeedWorkout.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
