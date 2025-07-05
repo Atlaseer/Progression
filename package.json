@@ -4,6 +4,10 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
+    "seed-users": "cd server && npm run seedUsers",
+    "seed-exercises": "cd server && npm run seedExercises",
+    "seed-workouts": "cd server && npm run seedWorkouts",
+
     "test": "jest"
   },
   "dependencies": {
