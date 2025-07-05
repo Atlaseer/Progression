@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import ip from 'ip';
 import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
+import userRoutes from './routes/user.js';
 import { error } from 'console';
 
 dotenv.config();
@@ -37,6 +38,8 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
+app.use('/api/users/', userRoutes)
+
 app.get('/', (req, res) => {
     res.send('Server is running')
 })
@@ -48,6 +51,7 @@ app.get('/api/message', (req, res) => {
 //Gets local IP address
 const ipAddress = ip.address();
 
+//Connects to database
 mongoose.connect(process.env.MONGO_URI)
     .then(() =>{
         console.log('Connected to MongoDB')
