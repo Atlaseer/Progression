@@ -26,7 +26,7 @@ async function seed() {
             { username: 'Test', email: 'test@mail.com', password: hashedPasswords[3], firstName: 'Test', lastName: 'Testsson', isAdmin: true },
         ]);
 
-        console.log(`${users.length} users successfully isnerted` );
+        console.log(`${users.length} users successfully inserted` );
         process.exit();
 
     } catch (err) {

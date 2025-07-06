@@ -8,6 +8,7 @@ import ip from 'ip';
 import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import userRoutes from './routes/user.js';
+import exerciseRoutes from './routes/exercise.js';
 import { error } from 'console';
 
 dotenv.config();
@@ -38,7 +39,9 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
-app.use('/api/users/', userRoutes)
+//Import the routes
+app.use('/api/users/', userRoutes);
+app.use('/api/exercises', exerciseRoutes);
 
 app.get('/', (req, res) => {
     res.send('Server is running')
