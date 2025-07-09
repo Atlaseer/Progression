@@ -1,0 +1,53 @@
+/* Form container */
+.edit-workout-form {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-medium);
+  max-width: 90dvw;
+  margin: 0 auto;
+}
+
+.edit-workout-form h3 {
+  margin-bottom: var(--spacing-medium);
+  color: var(--text-primary);
+}
+
+.edit-workout-form label {
+  display: block;
+  margin-bottom: var(--spacing-small);
+  color: var(--text-secondary);
+}
+
+.edit-workout-form input,
+.edit-workout-form textarea {
+  width: 100%;
+  padding: var(--spacing-small);
+  margin-bottom: var(--spacing-medium);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: var(--background-primary);
+  color: var(--text-primary);
+}
+
+.edit-workout-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-workout-actions button {
+  padding: var(--spacing-small) var(--spacing-medium);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.edit-workout-actions button:first-child {
+  background-color: var(--button-primary-background);
+  color: var(--button-primary-text);
+}
+
+.edit-workout-actions button:last-child {
+  background-color: var(--button-danger-background);
+  color: var(--button-danger-text);
+}
