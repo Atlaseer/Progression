@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "./AuthContext";
 
 const navLinks = [
   { to: "/", label: "Home", exact: true },

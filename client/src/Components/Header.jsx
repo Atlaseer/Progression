@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import UserMenu from './UserMenu';
 import MobileMenu from './MobileMenu';
 import SearchBar from './SearchBar';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from './AuthContext';
 import logo from '../assets/foodlover.svg';
 import { getStoredTheme, setStoredTheme } from '../utils/theme';
 
@@ -23,7 +23,7 @@ const Header = () => {
         setStoredTheme(isDark ? 'dark' : 'light');
     }, [isDark]);
 
-    // Check screen resolution to determine if mobile view is needed
+    //Check screen resolution to determine if mobile view is needed
     useEffect(() => {
         const handleResize = () => {
             setIsMobileView(window.innerWidth <= 768);
@@ -37,14 +37,14 @@ const Header = () => {
         };
     }, []);
 
-    // Synchronize searchText with the URL's search query parameter
+    //Synchronize searchText with the URL's search query parameter
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const searchParam = params.get('search') || "";
         setSearchText(searchParam);
     }, [location.search]);
 
-    // Reset searchText when navigating to a new page
+    //Reset searchText when navigating to a new page
     useEffect(() => {
         const unlisten = () => setSearchText("");
         window.addEventListener('popstate', unlisten);
@@ -57,10 +57,10 @@ const Header = () => {
     const handleSearchKeyDown = (e) => {
         if (e.key === 'Enter') {
             if (searchText.trim()) {
-                // Go to homepage with search param
+                //Go to homepage with search param
                 if (navigate) navigate(`/?search=${encodeURIComponent(searchText.trim())}`);
             } else {
-                // Remove search param to show all posts
+                //Remove search param to show all posts
                 if (navigate) navigate(`/`);
             }
         }

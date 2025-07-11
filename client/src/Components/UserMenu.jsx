@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { FaUserCircle, FaChevronDown } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from './AuthContext';
 
 const UserMenu = () =>
 {
