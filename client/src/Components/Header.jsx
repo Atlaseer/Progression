@@ -6,7 +6,7 @@ import UserMenu from './UserMenu';
 import MobileMenu from './MobileMenu';
 import SearchBar from './SearchBar';
 import { useAuth } from './AuthContext';
-import logo from '../assets/foodlover.svg';
+import logo from '../assets/progressionIcon.svg';
 import { getStoredTheme, setStoredTheme } from '../utils/theme';
 
 const Header = () => {
