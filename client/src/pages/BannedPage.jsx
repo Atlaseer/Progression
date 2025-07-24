@@ -1,12 +1,12 @@
 import React from 'react';
-import { useAuth } from '../Components/AuthContext';
+import { useAuth } from '../components/AuthContext';
 
 const BannedPage = () => {
   const { logout } = useAuth();
 
   const handleSignOut = async () => {
     await logout();
-    window.location.href = '/'; // Redirect to homepage after logout
+    window.location.href = '/'; //Redirect to homepage after logout
   };
 
   return (
