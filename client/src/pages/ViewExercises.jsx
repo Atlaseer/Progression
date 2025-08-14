@@ -1,6 +1,6 @@
 import '../styles/Main.css';
 
-const ViewExercises = () => {
+const ViewExercisesPage = () => {
     return(
         <div className='ViewExercises-container'>
             <main className='ViewExercises-main'>
@@ -12,4 +12,4 @@ const ViewExercises = () => {
     )
 }
 
-export default ViewExercises;
+export default ViewExercisesPage;

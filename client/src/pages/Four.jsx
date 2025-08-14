@@ -1,6 +1,6 @@
 import '../styles/Main.css'
 
-const four= ()=>{
+const Four = ()=>{
     return(
         <div className='404-container'>
             <main className='404-main'>
@@ -15,4 +15,4 @@ const four= ()=>{
     )
 }
 
-export default four;
+export default Four;

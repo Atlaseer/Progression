@@ -4,17 +4,18 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Header from './components/Header';
 import Footer from './components/Footer';
+import {useAuth} from './components/AuthContext';
 
-import NotFound from './pages/404';
+import Four from './pages/Four';
 import AboutPage from './pages/AboutPage';
 import BannedPage from './pages/BannedPage';
 import HomePage from './pages/HomePage';
 import LoadingPage from './pages/LoadingPage';
-import LoginPage from './pages/Loginpage';
+import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import RegisterUserPage from './pages/RegisterUserPage';
 import RegisterWorkoutPage from './pages/RegisterWorkoutPage';
-import ViewExercises from './pages/ViewExercises';
+import ViewExercisesPage from './pages/ViewExercises';
 import ViewWorkoutsPage from './pages/ViewWorkoutsPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
