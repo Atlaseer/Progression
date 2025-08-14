@@ -5,7 +5,7 @@ const HomePage = () => {
     return (
         <div className='homepage-container'>
             <main className="homepage-main">
-                <PostList />
+                <h1>This is the home page!</h1>
             </main>
 
         </div>
