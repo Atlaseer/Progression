@@ -71,8 +71,8 @@ const Header = () => {
         <div className='forum-seperate-part'>
           <div className='forum-logo'>
             <Link to="/" className='logo-link'>
-              <img src={logo} alt="FoodLovers Logo" className="logo-icon" />
-              <h2>FoodLovers</h2>
+              <img src={logo} alt="Progression Logo" className="logo-icon" />
+              <h2>Progression</h2>
             </Link>
           </div>
 
