@@ -3,7 +3,7 @@ import { FaSearch } from 'react-icons/fa';
 
 const SearchBar = ({ searchText, setSearchText, handleSearchKeyDown }) => {
   return (
-    <div className="forum-search">
+    <div className="progression-search">
       <FaSearch className="search-icon" />
       <input
         type="text"

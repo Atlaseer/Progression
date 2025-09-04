@@ -3,8 +3,8 @@ import '../styles/Main.css';
 
 const Footer = () => {
   return (
-    <footer className="forum-footer">
-      <p>&copy; {new Date().getFullYear()} FoodLovers. All rights reserved.</p>
+    <footer className="progression-footer">
+      <p>&copy; {new Date().getFullYear()} Progression. All rights reserved.</p>
     </footer>
   );
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import ThemeToggle from './ThemeToggle';
 import Navbar from './Navbar';
 import SearchBar from './SearchBar';
 

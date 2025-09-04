@@ -7,7 +7,6 @@ import MobileMenu from './MobileMenu';
 import SearchBar from './SearchBar';
 import { useAuth } from './AuthContext';
 import logo from '../assets/progressionIcon.svg';
-import { getStoredTheme, setStoredTheme } from '../utils/theme';
 
 const Header = () => {
     const { user, isAdmin } = useAuth();
@@ -16,12 +15,7 @@ const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobileView, setIsMobileView] = useState(false);
     const [searchText, setSearchText] = useState("");
-    const [isDark, setIsDark] = useState(getStoredTheme() === 'dark');
 
-    useEffect(() =>
-    {
-        setStoredTheme(isDark ? 'dark' : 'light');
-    }, [isDark]);
 
     //Check screen resolution to determine if mobile view is needed
     useEffect(() => {
