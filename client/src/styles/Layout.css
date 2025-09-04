@@ -64,7 +64,7 @@
   color: var(--button-bg);
 }
 
-.forum-search {
+.progression-search {
   display: flex;
   align-items: center;
   background-color: var(--bg-card);
@@ -185,7 +185,7 @@
     display: none;
   }
 
-  .forum-search {
+  .progression-search {
     width: 100%;
     margin-top: 1rem;
   }

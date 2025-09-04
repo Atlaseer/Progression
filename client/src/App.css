@@ -5,6 +5,13 @@
   text-align: center;
 }
 
+.logo-icon {
+  aspect-ratio: 1/1;
+  width: 64px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
