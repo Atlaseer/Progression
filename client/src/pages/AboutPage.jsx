@@ -1,10 +1,17 @@
+import React from 'react';
 import '../styles/Main.css';
 
 const AboutPage = ()=>{
-        return (
+    return (
         <div className='about-container'>
             <main className="about-main">
-                <PostList />
+                <h1>
+                    About this project
+                </h1>
+                <p>
+                    This website is built and maintained by Simon Persson
+
+                </p>
             </main>
 
         </div>

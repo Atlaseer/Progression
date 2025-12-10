@@ -68,6 +68,14 @@ router.put('/:id', async (req, res) => {
   }
 })
 
+router.patch('/:id', async (req, res) => {
+  try{
+
+  } catch(err) {
+    res.status(500).json({ error: err.message })
+  }
+})
+
 //Delete an exercise by ID
 router.delete('/:id', async (req, res) => {
     try {

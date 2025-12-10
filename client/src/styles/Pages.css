@@ -11,6 +11,17 @@
   padding: 20px;
 }
 
+.about-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.about-main {
+  display: flex;
+  flex-direction: column;
+}
+
 .post-list {
   flex: 1;
   padding: 0 0 0 5vw;
