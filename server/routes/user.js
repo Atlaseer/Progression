@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
         }
 
         if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-            res.status(422).send({ error: 'Invalid email format' })
+            return res.status(422).send({ error: 'Invalid email format' })
         }
 
         const existingUser = await User.findOne({ username });

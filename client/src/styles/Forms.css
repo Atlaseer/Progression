@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: max-content;
 }
 
 .create-post-form label {
@@ -15,28 +16,17 @@
 .create-post-form select {
   padding: 8px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
-  background: white;
-  color: #000;
+  background: var(--bg-main);
+  color: var(--text-color);
 }
 
-.dark .create-post-form input,
-.dark .create-post-form textarea,
-.dark .create-post-form select {
-  background: #3c3c3c;
-  color: #fff;
-  border-color: #555;
+.create-post-form button:hover {
+  background-color: var(--button-bg-hover);
 }
 
-/* Register page */
-.create-post-form {
-  display: flex;
-  flex-direction: column;
-  height: max-content;
-}
-
-/* Full-width register button */
+/* Full-width submit button */
 input.form-submit-button {
   width: 100%;
   padding: 12px;
@@ -48,10 +38,6 @@ input.form-submit-button {
   cursor: pointer;
   font-size: 1rem;
   margin-top: 12px;
-}
-
-.create-post-form button:hover {
-  background-color: var(--button-bg-hover);
 }
 
 /* Input field error state */
@@ -90,7 +76,7 @@ td {
 .add-comment-form input[type="text"] {
   flex: 1;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 1rem;
 }

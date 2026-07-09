@@ -1,4 +1,3 @@
-
 .banned-page {
   display: flex;
   flex-direction: column;
@@ -8,12 +7,11 @@
   background-color: var(--bg-main);
   color: #721c24;
   text-align: center;
-  font-family: Arial, sans-serif;
 }
 
 .banned-page h1 {
   font-size: 2.5rem;
-    color: hsl(354, 100%, 37%);
+  color: hsl(354, 100%, 37%);
   margin-bottom: 1rem;
 }
 

@@ -9,7 +9,8 @@ import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import userRoutes from './routes/user.js';
 import exerciseRoutes from './routes/exercise.js';
-import { error } from 'console';
+import authRoutes from './routes/authentication.js';
+import workoutRoutes from './routes/workout.js';
 
 dotenv.config();
 const app = express();
@@ -42,6 +43,8 @@ app.use(express.json());
 //Import the routes
 app.use('/api/users/', userRoutes);
 app.use('/api/exercises', exerciseRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/workouts', workoutRoutes);
 
 app.get('/', (req, res) => {
     res.send('Server is running')

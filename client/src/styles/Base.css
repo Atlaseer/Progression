@@ -10,7 +10,6 @@
   --button-bg: #3b82f6;
   --button-bg-hover: #2563eb;
 
-  /* Dark mode specific overrides */
   --background-primary: #2c2c2c;
   --background-secondary: #1e1e1e;
   --text-primary: #f0f0f0;
@@ -39,4 +38,26 @@ h6,
 label,
 p {
   color: var(--text-color);
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: var(--button-bg);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: 1em;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: var(--button-bg-hover);
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

@@ -1,48 +1,40 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { FaUserCircle, FaChevronDown } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
-const UserMenu = () =>
-{
-    const { user, logout } = useAuth();
-    const [open, setOpen] = useState(false);
-    const menuRef = useRef();
-    const navigate = useNavigate();
+const UserMenu = () => {
+  const { user, logout } = useAuth();
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef();
+  const navigate = useNavigate();
 
-    const handleLogout = useCallback(async () => 
-    {
-        await logout();
+  const handleLogout = useCallback(async () => {
+    await logout();
+    setOpen(false);
+    navigate('/');
+  }, [logout, navigate]);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
         setOpen(false);
-        navigate('/');
-    }, [logout, navigate]);
+      }
+    };
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    if (open) {
+      document.addEventListener('mousedown', handleOutsideClick);
+      document.addEventListener('keydown', handleEscape);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [open]);
 
-    useEffect(() => 
-    {
-        const handleOutsideClick = (e) => 
-        {
-            if(menuRef.current && !menuRef.current.contains(e.target))
-            {
-                setOpen(false);
-            }
-        };
-        const handleEscape = (e) => 
-        {
-            if (e.key === 'Escape') setOpen(false);
-        };
-        if (open) 
-        {
-            document.addEventListener('mousedown', handleOutsideClick);
-            document.addEventListener('keydown', handleEscape);
-        }
-        return () => 
-        {
-            document.removeEventListener('mousedown', handleOutsideClick);
-            document.removeEventListener('keydown', handleEscape);
-        };
-    }, [open]);
-
-    return (
+  return (
     <div className="user-dropdown-wrapper" ref={menuRef}>
       <button
         className="user-dropdown-button"

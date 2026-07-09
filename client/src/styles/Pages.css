@@ -36,46 +36,6 @@
   border-radius: 6px;
 }
 
-.create-post-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Register page */
-.create-post-form {
-  display: flex;
-  flex-direction: column;
-  height: max-content;
-}
-
-/* Full-width register button */
-input.form-submit-button {
-  width: 100%;
-  padding: 12px;
-  background-color: var(--button-bg);
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-top: 12px;
-}
-
-/* Input field error state */
-input:invalid,
-textarea:invalid {
-  border: 1px solid hsl(0, 80%, 60%);
-}
-
-/* Error text */
-.txt-error {
-  color: hsl(0, 80%, 50%);
-  font-size: 0.95rem;
-  margin-top: 4px;
-}
-
 /* Bottom login link */
 .register-footer {
   text-align: center;
@@ -127,4 +87,379 @@ textarea:invalid {
 
 .comment-item:last-child {
   border-bottom: none;
+}
+
+/* ── Auth Pages (Login / Register) ───────────────────────── */
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 1rem;
+  min-height: calc(100vh - 60px);
+  background-color: var(--bg-main);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+}
+
+.auth-card h1 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Override global input margin from Admin.css within auth forms */
+.auth-form input {
+  margin-top: 0.3rem;
+  margin-bottom: 0;
+}
+
+.auth-name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.auth-hint {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+.auth-submit-btn {
+  width: 100%;
+  padding: 0.7rem;
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.auth-submit-btn:hover:not(:disabled) {
+  background-color: var(--button-bg-hover);
+}
+
+.auth-submit-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.auth-footer a {
+  color: var(--link-hover);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .auth-name-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── View Workouts Page ───────────────────────────────────── */
+
+.view-workouts-container {
+  min-height: calc(100vh - 60px);
+  background-color: var(--bg-main);
+  padding: 2rem 1rem;
+}
+
+.view-workouts-main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.workouts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.workouts-header h1 {
+  margin: 0;
+}
+
+.workouts-empty {
+  color: var(--text-muted);
+}
+
+.workout-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.workout-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1rem 1.25rem;
+}
+
+.workout-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.workout-date {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.delete-workout-btn {
+  background-color: var(--button-danger-background);
+  color: var(--button-danger-text);
+  border: none;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+}
+
+.delete-workout-btn:hover {
+  background-color: var(--button-danger-background);
+  opacity: 0.85;
+}
+
+.workout-sets-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.workout-sets-table th {
+  text-align: left;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.workout-sets-table td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.workout-sets-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Register Workout Page ────────────────────────────────── */
+
+.workout-page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 60px);
+  background-color: var(--bg-main);
+}
+
+.workout-form-card {
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+}
+
+.workout-form-card h1 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.75rem;
+}
+
+.workout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.workout-sets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.workout-set-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+}
+
+.set-number {
+  font-weight: bold;
+  color: var(--text-muted);
+  min-width: 2rem;
+  padding-top: 0.25rem;
+}
+
+.set-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.set-exercise-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.set-exercise-label select {
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-card);
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.set-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.set-metrics label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  min-width: 80px;
+  flex: 1;
+}
+
+.set-metrics input {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-card);
+  color: var(--text-color);
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.remove-set-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius);
+  align-self: flex-start;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.remove-set-btn:hover {
+  color: var(--button-danger-background);
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.add-set-btn {
+  align-self: flex-start;
+  background: none;
+  border: 1px dashed var(--border-color);
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.add-set-btn:hover {
+  border-color: var(--button-bg);
+  color: var(--button-bg);
+  background: none;
+}
+
+.submit-workout-btn {
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-self: flex-end;
+}
+
+.submit-workout-btn:hover:not(:disabled) {
+  background-color: var(--button-bg-hover);
+}
+
+.submit-workout-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .workout-set-row {
+    flex-direction: column;
+  }
+
+  .set-metrics {
+    gap: 0.5rem;
+  }
+
+  .submit-workout-btn {
+    align-self: stretch;
+  }
 }

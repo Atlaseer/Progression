@@ -3,7 +3,7 @@ import '../styles/Main.css';
 
 const Footer = () => {
   return (
-    <footer className="progression-footer">
+    <footer className="forum-footer">
       <p>&copy; {new Date().getFullYear()} Progression. All rights reserved.</p>
     </footer>
   );

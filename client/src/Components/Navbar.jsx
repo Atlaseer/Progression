@@ -2,8 +2,9 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 const navLinks = [
-  { to: "/", label: "Home", exact: true },
-  { to: "/about", label: "About" },
+  { to: '/', label: 'Home', exact: true },
+  { to: '/about', label: 'About' },
+  { to: '/workouts', label: 'Workouts' },
 ];
 
 const Navbar = ({ currentPath }) => {
