@@ -84,22 +84,18 @@ const ViewWorkoutsPage = () => {
                   <thead>
                     <tr>
                       <th>Exercise</th>
-                      <th>Reps</th>
                       <th>Weight (kg)</th>
-                      <th>Duration (s)</th>
-                      <th>Distance (m)</th>
-                      <th>Rest (s)</th>
+                      <th>Reps</th>
+                      <th>Time (s)</th>
                     </tr>
                   </thead>
                   <tbody>
                     {workout.sets.map((set, i) => (
                       <tr key={i}>
                         <td>{set.exercise?.name ?? '—'}</td>
-                        <td>{set.reps ?? '—'}</td>
                         <td>{set.weight ?? '—'}</td>
+                        <td>{set.reps ?? '—'}</td>
                         <td>{set.duration ?? '—'}</td>
-                        <td>{set.distance ?? '—'}</td>
-                        <td>{set.rest ?? '—'}</td>
                       </tr>
                     ))}
                   </tbody>

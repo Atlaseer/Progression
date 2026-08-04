@@ -6,20 +6,13 @@ import '../styles/Main.css';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-const emptySet = () => ({
-  exercise: '',
-  reps: '',
-  weight: '',
-  duration: '',
-  distance: '',
-  rest: '',
-});
+const emptyExercise = () => ({ exercise: '', weight: '', reps: '', duration: '' });
 
 const RegisterWorkoutPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [exercises, setExercises] = useState([]);
-  const [sets, setSets] = useState([emptySet()]);
+  const [sets, setSets] = useState([emptyExercise()]);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -36,26 +29,24 @@ const RegisterWorkoutPage = () => {
     );
   };
 
-  const addSet = () => setSets((prev) => [...prev, emptySet()]);
+  const addExercise = () => setSets((prev) => [...prev, emptyExercise()]);
 
-  const removeSet = (index) => setSets((prev) => prev.filter((_, i) => i !== index));
+  const removeExercise = (index) => setSets((prev) => prev.filter((_, i) => i !== index));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
     if (sets.some((s) => !s.exercise)) {
-      setError('Every set must have an exercise selected.');
+      setError('Every exercise must be selected.');
       return;
     }
 
     const payload = sets.map((s) => ({
       exercise: s.exercise,
-      ...(s.reps !== '' && { reps: Number(s.reps) }),
       ...(s.weight !== '' && { weight: Number(s.weight) }),
+      ...(s.reps !== '' && { reps: Number(s.reps) }),
       ...(s.duration !== '' && { duration: Number(s.duration) }),
-      ...(s.distance !== '' && { distance: Number(s.distance) }),
-      ...(s.rest !== '' && { rest: Number(s.rest) }),
     }));
 
     try {
@@ -92,99 +83,70 @@ const RegisterWorkoutPage = () => {
         {error && <p className="txt-error">{error}</p>}
 
         <form onSubmit={handleSubmit} className="workout-form">
-          <div className="workout-sets">
+          <div className="workout-exercise-list">
+            <div className="workout-exercise-header">
+              <span>Exercise</span>
+              <span>Weight (kg)</span>
+              <span>Reps</span>
+              <span>Time (s)</span>
+              <span />
+            </div>
+
             {sets.map((set, index) => (
-              <div key={index} className="workout-set-row">
-                <span className="set-number">#{index + 1}</span>
+              <div key={index} className="workout-exercise-row">
+                <select
+                  value={set.exercise}
+                  onChange={(e) => updateSet(index, 'exercise', e.target.value)}
+                  required
+                >
+                  <option value="">Select…</option>
+                  {exercises.map((ex) => (
+                    <option key={ex._id} value={ex._id}>
+                      {ex.name}
+                    </option>
+                  ))}
+                </select>
 
-                <div className="set-fields">
-                  <label className="set-exercise-label">
-                    Exercise
-                    <select
-                      value={set.exercise}
-                      onChange={(e) => updateSet(index, 'exercise', e.target.value)}
-                      required
-                    >
-                      <option value="">Select exercise…</option>
-                      {exercises.map((ex) => (
-                        <option key={ex._id} value={ex._id}>
-                          {ex.name}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.5"
+                  placeholder="—"
+                  value={set.weight}
+                  onChange={(e) => updateSet(index, 'weight', e.target.value)}
+                />
 
-                  <div className="set-metrics">
-                    <label>
-                      Reps
-                      <input
-                        type="number"
-                        min="0"
-                        placeholder="—"
-                        value={set.reps}
-                        onChange={(e) => updateSet(index, 'reps', e.target.value)}
-                      />
-                    </label>
-                    <label>
-                      Weight (kg)
-                      <input
-                        type="number"
-                        min="0"
-                        step="0.5"
-                        placeholder="—"
-                        value={set.weight}
-                        onChange={(e) => updateSet(index, 'weight', e.target.value)}
-                      />
-                    </label>
-                    <label>
-                      Duration (s)
-                      <input
-                        type="number"
-                        min="0"
-                        placeholder="—"
-                        value={set.duration}
-                        onChange={(e) => updateSet(index, 'duration', e.target.value)}
-                      />
-                    </label>
-                    <label>
-                      Distance (m)
-                      <input
-                        type="number"
-                        min="0"
-                        placeholder="—"
-                        value={set.distance}
-                        onChange={(e) => updateSet(index, 'distance', e.target.value)}
-                      />
-                    </label>
-                    <label>
-                      Rest (s)
-                      <input
-                        type="number"
-                        min="0"
-                        placeholder="—"
-                        value={set.rest}
-                        onChange={(e) => updateSet(index, 'rest', e.target.value)}
-                      />
-                    </label>
-                  </div>
-                </div>
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="—"
+                  value={set.reps}
+                  onChange={(e) => updateSet(index, 'reps', e.target.value)}
+                />
 
-                {sets.length > 1 && (
-                  <button
-                    type="button"
-                    className="remove-set-btn"
-                    onClick={() => removeSet(index)}
-                    aria-label="Remove set"
-                  >
-                    ✕
-                  </button>
-                )}
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="—"
+                  value={set.duration}
+                  onChange={(e) => updateSet(index, 'duration', e.target.value)}
+                />
+
+                <button
+                  type="button"
+                  className="remove-set-btn"
+                  onClick={() => removeExercise(index)}
+                  aria-label="Remove exercise"
+                  disabled={sets.length === 1}
+                >
+                  ✕
+                </button>
               </div>
             ))}
           </div>
 
-          <button type="button" className="add-set-btn" onClick={addSet}>
-            + Add Set
+          <button type="button" className="add-set-btn" onClick={addExercise}>
+            + Add Exercise
           </button>
 
           <button type="submit" className="submit-workout-btn" disabled={submitting}>
