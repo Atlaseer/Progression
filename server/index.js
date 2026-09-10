@@ -33,7 +33,7 @@ app.use(cors({
         }
     },
     credentials: true, 
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-type', 'Authorization', 'X-CSRF-Token']
 }))
 

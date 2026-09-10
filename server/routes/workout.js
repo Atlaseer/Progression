@@ -7,13 +7,18 @@ const router = express.Router();
 // Create a workout tied to the authenticated user
 router.post('/', requireAuth, async (req, res) => {
   try {
-    const { sets } = req.body;
+    const { sets, date, startTime, endTime } = req.body;
 
     if (!sets || sets.length === 0) {
       return res.status(400).json({ error: 'At least one set is required' });
     }
 
-    const workout = new Workout({ user: req.user.id, sets });
+    const workoutData = { user: req.user.id, sets };
+    if (startTime) workoutData.startTime = new Date(startTime);
+    if (endTime) workoutData.endTime = new Date(endTime);
+    if (date) workoutData.createdAt = new Date(date);
+
+    const workout = new Workout(workoutData);
     await workout.save();
 
     const populated = await workout.populate('sets.exercise');
@@ -44,6 +49,28 @@ router.get('/user/:userId', async (req, res) => {
     res.json(workouts);
   } catch (err) {
     res.status(500).json({ error: `Failed to fetch workouts: ${err.message}` });
+  }
+});
+
+// Update a workout (only the owner)
+router.patch('/:id', requireAuth, async (req, res) => {
+  try {
+    const workout = await Workout.findById(req.params.id);
+    if (!workout) return res.status(404).json({ error: 'Workout not found' });
+    if (workout.user.toString() !== req.user.id)
+      return res.status(403).json({ error: 'Not authorized' });
+
+    const { sets, date, startTime, endTime } = req.body;
+    if (sets && sets.length > 0) workout.sets = sets;
+    if (startTime) workout.startTime = new Date(startTime);
+    if (endTime) workout.endTime = new Date(endTime);
+    if (date) workout.createdAt = new Date(date);
+
+    await workout.save();
+    const populated = await workout.populate('sets.exercise');
+    res.json({ message: 'Workout updated', workout: populated });
+  } catch (err) {
+    res.status(500).json({ error: `Failed to update workout: ${err.message}` });
   }
 });
 

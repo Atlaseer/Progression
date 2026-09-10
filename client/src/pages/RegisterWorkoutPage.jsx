@@ -6,13 +6,28 @@ import '../styles/Main.css';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-const emptyExercise = () => ({ exercise: '', weight: '', reps: '', duration: '' });
+const emptyExercise = () => ({ exercise: '', weight: '', reps: '' });
+
+const todayValue = () => new Date().toISOString().slice(0, 10);
+
+const toISO = (date, time) => new Date(`${date}T${time}`).toISOString();
 
 const RegisterWorkoutPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [exercises, setExercises] = useState([]);
   const [sets, setSets] = useState([emptyExercise()]);
+  const [workoutDate, setWorkoutDate] = useState(todayValue());
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+
+  const computedDuration = (() => {
+    if (!startTime || !endTime) return null;
+    const [sh, sm] = startTime.split(':').map(Number);
+    const [eh, em] = endTime.split(':').map(Number);
+    const diff = (eh * 60 + em) - (sh * 60 + sm);
+    return diff > 0 ? diff : diff + 24 * 60; // handle crossing midnight
+  })();
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -46,14 +61,18 @@ const RegisterWorkoutPage = () => {
       exercise: s.exercise,
       ...(s.weight !== '' && { weight: Number(s.weight) }),
       ...(s.reps !== '' && { reps: Number(s.reps) }),
-      ...(s.duration !== '' && { duration: Number(s.duration) }),
     }));
 
     try {
       setSubmitting(true);
       await axios.post(
         `${SERVER_URL}/api/workouts`,
-        { sets: payload },
+        {
+          sets: payload,
+          date: workoutDate,
+          ...(startTime && { startTime: toISO(workoutDate, startTime) }),
+          ...(endTime && { endTime: toISO(workoutDate, endTime) }),
+        },
         { withCredentials: true }
       );
       navigate('/workouts');
@@ -83,12 +102,60 @@ const RegisterWorkoutPage = () => {
         {error && <p className="txt-error">{error}</p>}
 
         <form onSubmit={handleSubmit} className="workout-form">
+          <div className="workout-date-row">
+            <label htmlFor="workout-date">Date</label>
+            <div className="workout-date-inputs">
+              <input
+                id="workout-date"
+                type="date"
+                value={workoutDate}
+                max={todayValue()}
+                onChange={(e) => setWorkoutDate(e.target.value)}
+              />
+              <button
+                type="button"
+                className="today-btn"
+                onClick={() => setWorkoutDate(todayValue())}
+                disabled={workoutDate === todayValue()}
+              >
+                Today
+              </button>
+            </div>
+          </div>
+
+          <div className="workout-time-row">
+            <div className="workout-date-row">
+              <label htmlFor="workout-start">Start</label>
+              <input
+                id="workout-start"
+                type="time"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+              />
+            </div>
+            <div className="workout-date-row">
+              <label htmlFor="workout-end">End</label>
+              <input
+                id="workout-end"
+                type="time"
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+              />
+            </div>
+            {computedDuration !== null && (
+              <span className="workout-duration-unit">
+                {Math.floor(computedDuration / 60) > 0
+                  ? `${Math.floor(computedDuration / 60)}h ${computedDuration % 60}min`
+                  : `${computedDuration} min`}
+              </span>
+            )}
+          </div>
+
           <div className="workout-exercise-list">
             <div className="workout-exercise-header">
               <span>Exercise</span>
               <span>Weight (kg)</span>
               <span>Reps</span>
-              <span>Time (s)</span>
               <span />
             </div>
 
@@ -122,14 +189,6 @@ const RegisterWorkoutPage = () => {
                   placeholder="—"
                   value={set.reps}
                   onChange={(e) => updateSet(index, 'reps', e.target.value)}
-                />
-
-                <input
-                  type="number"
-                  min="0"
-                  placeholder="—"
-                  value={set.duration}
-                  onChange={(e) => updateSet(index, 'duration', e.target.value)}
                 />
 
                 <button
