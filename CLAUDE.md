@@ -53,19 +53,26 @@ npm run seed-workouts
 - Pages live in `pages/`, shared UI in `Components/`, CSS in `styles/`.
 
 ### Server (`server/`)
-- Express 5 + Mongoose + MongoDB
+- Express 5 + Mongoose + MongoDB; uses ES modules (`import`/`export`) throughout
 - Entry point: `index.js` — connects to MongoDB then starts the HTTP server
-- Auth: JWT issued on login, stored as an httpOnly cookie (`token`), verified on protected routes
-- Route modules:
-  - `routes/user.js` → mounted at `/api/users/` (CRUD for users)
-  - `routes/authentication.js` → login, logout, `/me` (should be mounted at `/api/auth/`)
-  - `routes/set.js` → set-related routes
-  - Exercise routes are imported in `index.js` from `routes/exercise.js`
-- Models: `User`, `Workout`, `Exercise`, `Set` (Set is an embedded schema inside Workout)
+- Auth middleware: `middleware/auth.js` exports `requireAuth` — reads `token` cookie, verifies JWT, attaches `req.user`
+- Route modules (all mounted in `index.js`):
+  - `routes/authentication.js` → `/api/auth` (login, logout, `/me`)
+  - `routes/user.js` → `/api/users/` (CRUD for users)
+  - `routes/exercise.js` → `/api/exercises` (CRUD; no auth required)
+  - `routes/workout.js` → `/api/workouts` (CRUD; protected by `requireAuth`; owner-only writes)
+  - `routes/set.js` — exists but is **not mounted** in `index.js`
 - File uploads handled by `multer`; static files served from `uploads/`
+
+### Client routes (`client/src/App.jsx`)
+- `/` → HomePage, `/about` → AboutPage, `/login` → LoginPage, `/signup` → RegisterUserPage
+- `/profile/:username` → ProfilePage
+- `/workouts` → ViewWorkoutsPage, `/workouts/new` → RegisterWorkoutPage
+- `/exercises` → ViewExercisesPage
+- Banned users (`isActive === false`) bypass routing and always see `BannedPage`
 
 ### Data Model
 - `User`: username, email, password (bcrypt), firstName, lastName, isAdmin, isActive, bio
-- `Workout`: belongs to a User, contains an array of embedded `Set` documents
-- `Set`: embedded in Workout, references an Exercise
-- `Exercise`: standalone collection (seeded via `SeedExercise.js`)
+- `Workout`: ref to User + embedded `sets` array + optional `startTime`/`endTime`/`createdAt`
+- `Set` (embedded in Workout): ref to Exercise + reps, duration, distance, weight, rest. `Set.js` exports both the mongoose model (`Set`) and the raw `setSchema` used for embedding.
+- `Exercise`: standalone collection (seeded via `seeds/SeedExercise.js`); fields: name, muscleGroup, equipment, description, pictureUrl
