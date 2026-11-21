@@ -1,23 +1,23 @@
 :root {
-  --bg-main: #1e1e1e;
-  --bg-card: #2c2c2c;
-  --bg-sidebar: #2c2c2c;
-  --bg-footer: #1e1e1e;
-  --border-color: #444;
-  --text-color: #ddd;
-  --text-muted: #aaa;
-  --link-hover: #8ab4f8;
-  --button-bg: #3b82f6;
-  --button-bg-hover: #2563eb;
+  --bg-main: #192635;
+  --bg-card: #1e3049;
+  --bg-sidebar: #1e3049;
+  --bg-footer: #192635;
+  --border-color: #000000;
+  --text-color: #c8def0;
+  --text-muted: #7599b9;
+  --link-hover: #74b4f5;
+  --button-bg: #2c6fad;
+  --button-bg-hover: #235990;
 
-  --background-primary: #2c2c2c;
-  --background-secondary: #1e1e1e;
-  --text-primary: #f0f0f0;
-  --text-secondary: #bbb;
+  --background-primary: #1e3049;
+  --background-secondary: #192635;
+  --text-primary: #c8def0;
+  --text-secondary: #8aaec8;
 
-  --button-primary-background: #3b82f6;
+  --button-primary-background: #2c6fad;
   --button-primary-text: #ffffff;
-  --button-danger-background: #e74c3c;
+  --button-danger-background: #c0392b;
   --button-danger-text: #ffffff;
 
   --spacing-small: 0.5rem;

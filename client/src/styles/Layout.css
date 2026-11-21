@@ -38,11 +38,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background-color: var(--bg-card);
+  padding: 12px 24px;
+  background-color: #162130;
   border-bottom: 1px solid var(--border-color);
   color: var(--text-color);
   width: 100%;
+  box-sizing: border-box;
 }
 
 .forum-separate-part {
@@ -190,5 +191,41 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .forum-header {
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+    position: relative;
+  }
+
+  .forum-separate-part {
+    flex: 1;
+    width: auto;
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .forum-user {
+    width: auto;
+    margin-top: 0;
+    flex-shrink: 0;
+  }
+
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .mobile-menu.open {
+    display: flex;
   }
 }

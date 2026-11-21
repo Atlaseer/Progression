@@ -29,18 +29,20 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<RegisterUserPage />} />
-        <Route path="/profile/:username" element={<ProfilePage />} />
-        <Route path="/workouts" element={<ViewWorkoutsPage />} />
-        <Route path="/workouts/new" element={<RegisterWorkoutPage />} />
-        <Route path="/exercises" element={<ViewExercisesPage />} />
-        <Route path="*" element={<Four />} />
-      </Routes>
-      <Footer />
+      <div className="content-wrapper">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<RegisterUserPage />} />
+          <Route path="/profile/:username" element={<ProfilePage />} />
+          <Route path="/workouts" element={<ViewWorkoutsPage />} />
+          <Route path="/workouts/new" element={<RegisterWorkoutPage />} />
+          <Route path="/exercises" element={<ViewExercisesPage />} />
+          <Route path="*" element={<Four />} />
+        </Routes>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
