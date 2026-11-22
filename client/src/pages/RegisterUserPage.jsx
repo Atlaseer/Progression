@@ -66,31 +66,30 @@ const RegisterUserPage = () => {
     <div className="auth-page">
       <div className="auth-card">
         <h1>Create Account</h1>
+        <p className="auth-subtitle">Join us today!</p>
 
         <form onSubmit={handleSubmit} className="auth-form">
-          <div className="auth-name-row">
-            <label>
-              First Name
-              <input
-                type="text"
-                value={form.firstName}
-                onChange={set('firstName')}
-                required
-                autoFocus
-                autoComplete="given-name"
-              />
-            </label>
-            <label>
-              Last Name
-              <input
-                type="text"
-                value={form.lastName}
-                onChange={set('lastName')}
-                required
-                autoComplete="family-name"
-              />
-            </label>
-          </div>
+          <label>
+            First Name
+            <input
+              type="text"
+              value={form.firstName}
+              onChange={set('firstName')}
+              required
+              autoFocus
+              autoComplete="given-name"
+            />
+          </label>
+          <label>
+            Last Name
+            <input
+              type="text"
+              value={form.lastName}
+              onChange={set('lastName')}
+              required
+              autoComplete="family-name"
+            />
+          </label>
 
           <label>
             Username

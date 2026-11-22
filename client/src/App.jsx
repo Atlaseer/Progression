@@ -12,8 +12,10 @@ import LoginPage from './pages/Loginpage';
 import ProfilePage from './pages/ProfilePage';
 import RegisterUserPage from './pages/RegisterUserPage';
 import RegisterWorkoutPage from './pages/RegisterWorkoutPage';
+import ExercisesPage from './pages/ExercisesPage';
 import ViewExercisesPage from './pages/ViewExercises';
 import ViewWorkoutsPage from './pages/ViewWorkoutsPage';
+import WorkoutsPage from './pages/WorkoutsPage';
 
 function App() {
   const { loading, isActive, user } = useAuth();
@@ -26,6 +28,17 @@ function App() {
     return <BannedPage />;
   }
 
+  if (!user) {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/signup" element={<RegisterUserPage />} />
+          <Route path="*" element={<LoginPage />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
+
   return (
     <BrowserRouter>
       <Header />
@@ -36,9 +49,12 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<RegisterUserPage />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
-          <Route path="/workouts" element={<ViewWorkoutsPage />} />
+          <Route path="/workouts" element={<WorkoutsPage />} />
           <Route path="/workouts/new" element={<RegisterWorkoutPage />} />
-          <Route path="/exercises" element={<ViewExercisesPage />} />
+          <Route path="/workouts/list" element={<ViewWorkoutsPage />} />
+          <Route path="/exercises" element={<ExercisesPage />} />
+          <Route path="/exercises/new" element={<ViewExercisesPage />} />
+          <Route path="/exercises/list" element={<ViewExercisesPage />} />
           <Route path="*" element={<Four />} />
         </Routes>
         <Footer />
